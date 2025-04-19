@@ -1,77 +1,109 @@
 document.addEventListener("DOMContentLoaded", () => {
     let users = JSON.parse(localStorage.getItem("users")) || [];
 
-    let form = document.querySelector(".form-box.register form");
-    let name = form.querySelector("input[placeholder='Name']");
-    let username = form.querySelector("input[placeholder='Username']");
-    let email = form.querySelector("input[placeholder='Email']");
-    let password = form.querySelector("input[placeholder='Password']");
-    let confirmPassword = form.querySelector("input[placeholder=' Confirm Password']");
 
-    let truePassword = document.createElement("i");
-    truePassword.className = "fa-solid fa-check text-success d-none";
-    password.parentElement.appendChild(truePassword);
+    let registerForm = document.querySelector(".form-box.register form");
+    let loginForm = document.querySelector(".form-box.login form");
 
-    let falsePasswordStyle = document.createElement("i");
-    falsePasswordStyle.className = "fa-solid fa-x text-danger d-none";
-    password.parentElement.appendChild(falsePasswordStyle);
 
-    form.addEventListener("submit", register);
+    if (registerForm) {
+        let name = registerForm.querySelector("input[placeholder='Name']");
+        let username = registerForm.querySelector("input[placeholder='Username']");
+        let email = registerForm.querySelector("input[placeholder='Email']");
+        let password = registerForm.querySelector("input[placeholder='Password']");
+        let confirmPassword = registerForm.querySelector("input[placeholder=' Confirm Password']");
 
-    function register(e) {
-        e.preventDefault();
+        let truePassword = document.createElement("i");
+        truePassword.className = "fa-solid fa-check text-success d-none";
+        password.parentElement.appendChild(truePassword);
 
-        let id = uuidv4(); 
-        let trimmedUsername = username.value.trim();
-        let trimmedEmail = email.value.trim();
-        let trimmedPassword = password.value;
+        let falsePasswordStyle = document.createElement("i");
+        falsePasswordStyle.className = "fa-solid fa-x text-danger d-none";
+        password.parentElement.appendChild(falsePasswordStyle);
 
-        if (trimmedUsername.length < 3 || trimmedUsername.length > 20) {
-            alert("Username must be between 3 and 20 characters");
-            return;
-        }
+        registerForm.addEventListener("submit", function (e) {
+            e.preventDefault();
 
-        if (trimmedPassword !== confirmPassword.value) {
-            alert("Passwords do not match");
-            return;
-        }
+            let id = uuidv4(); 
+            let trimmedUsername = username.value.trim();
+            let trimmedEmail = email.value.trim();
+            let trimmedPassword = password.value;
 
-        if (trimmedPassword.length < 8) {
-            truePassword.classList.add("d-none");
-            falsePasswordStyle.classList.remove("d-none");
-            alert("Password must be at least 8 characters");
-            return;
-        } else {
-            falsePasswordStyle.classList.add("d-none");
-            truePassword.classList.remove("d-none");
-        }
+            if (trimmedUsername.length < 3 || trimmedUsername.length > 20) {
+                alert("Username must be between 3 and 20 characters");
+                return;
+            }
 
-        if (users.some(user => user.username === trimmedUsername)) {
-           alert("Username already exists");
-            return;
-        }
+            if (trimmedPassword !== confirmPassword.value) {
+                alert("Passwords do not match");
+                return;
+            }
 
-        if (users.some(user => user.email === trimmedEmail)) {
-            alert("Email has already been used");
-            return;
-        }
+            if (trimmedPassword.length < 8) {
+                truePassword.classList.add("d-none");
+                falsePasswordStyle.classList.remove("d-none");
+                alert("Password must be at least 8 characters");
+                return;
+            } else {
+                falsePasswordStyle.classList.add("d-none");
+                truePassword.classList.remove("d-none");
+            }
 
-        let newUser = {
-            id,
-            name: name.value.trim(),
-            username: trimmedUsername,
-            email: trimmedEmail,
-            password: trimmedPassword,
-            isLogged: false,
-            wishlist: [],
-            basket: []
-        };
+            if (users.some(user => user.username === trimmedUsername)) {
+                alert("Username already exists");
+                return;
+            }
 
-        users.push(newUser);
-        localStorage.setItem("users", JSON.stringify(users));
+            if (users.some(user => user.email === trimmedEmail)) {
+                alert("Email has already been used");
+                return;
+            }
 
-        form.reset();
-    alert("Qeydiyyat uğurla tamamlandı! Log in edin");
+            let newUser = {
+                id,
+                name: name.value.trim(),
+                username: trimmedUsername,
+                email: trimmedEmail,
+                password: trimmedPassword,
+                isLogged: false,
+                wishlist: [],
+                basket: []
+            };
+
+            users.push(newUser);
+            localStorage.setItem("users", JSON.stringify(users));
+            registerForm.reset();
+
+            alert("Qeydiyyat uğurla tamamlandı! Log in edin");
+        });
+    }
+
+
+    if (loginForm) {
+        let username = loginForm.querySelector("input[placeholder='Username']");
+        let password = loginForm.querySelector("input[placeholder='Password']");
+
+        loginForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            let loginedUser = users.find(user =>
+                user.username === username.value && user.password === password.value
+            );
+
+            if (loginedUser) {
+                loginedUser.isLogged = true;
+                localStorage.setItem("users", JSON.stringify(users));
+                
+                alert("Giriş uğurludur!");
+                setTimeout(() => {
+                    window.location.href = "home.html";
+                }, 2000);
+            } else {
+                alert("İstifadəçi adı və ya şifrə yalnışdır!");
+            }
+
+            
+        });
     }
 
 
