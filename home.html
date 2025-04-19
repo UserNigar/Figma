@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="assets/css/home.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"/>
   <title>Document</title>
 </head>
 <body>
+  
   <header>
     <div class="container">
       <div class="row">
@@ -27,11 +28,9 @@
             <div class="dropdown">
               <button class="btn btn-light" type="button">
                 <i class="fa-solid fa-user"></i>
-                <span class="username">Username</span>
+                <span class="username usernameHeader"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item register" href="register.html">Register</a></li>
-                <li><a class="dropdown-item login" href="login.html">Login</a></li>
                 <li><a class="dropdown-item logout d-none" href="#">Logout</a></li>
                 <li><a class="dropdown-item edit d-none" href="editprofile.html">Edit Profile</a></li>
               </ul>
@@ -51,6 +50,7 @@
                 <p>basket</p>
               </div>
             </div>
+
           </div>
         </nav>
       </div>
@@ -76,11 +76,39 @@
 
   </section>
 
-  <!-- <main>
-    <div class="cards"></div>
-  </main> -->
+  <section id="products">
+    <div class="container">
+      <div class="row">
+        <div class="cards">
+          <!-- <div class="card">
+            <div class="card-image">
+              <img
+                src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+                alt="Fjallraven Backpack"
+              />
+            </div>
+            <div class="card-content">
+              <h2 class="card-title">Fjallraven - Foldsack No. 1 Backpack</h2>
+              <p class="card-category">Category: Men's Clothing</p>
+              <p class="card-description">
+                Your perfect pack for everyday use and walks in the forest.
+                Stash your laptop (up to 15 inches) in the padded sleeve.
+              </p>
+              <div class="card-footer">
+                <span class="card-price">$109.95</span>
+                <div class="card-rating">
+                  <span>⭐ 3.9</span>
+                  <span>(120 reviews)</span>
+                </div>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </section>
 
   <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-  <script src="assets/js/"></script>
+  <script src="assets/js/home.js"></script>
 </body>
 </html>

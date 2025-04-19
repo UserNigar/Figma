@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
     let users = JSON.parse(localStorage.getItem("users")) || [];
+    
 
-
+    
     let registerForm = document.querySelector(".form-box.register form");
     let loginForm = document.querySelector(".form-box.login form");
 
@@ -24,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         registerForm.addEventListener("submit", function (e) {
             e.preventDefault();
 
-            let id = uuidv4(); 
+            let id = uuidv4();
             let trimmedUsername = username.value.trim();
             let trimmedEmail = email.value.trim();
             let trimmedPassword = password.value;
@@ -79,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
+
     if (loginForm) {
         let username = loginForm.querySelector("input[placeholder='Username']");
         let password = loginForm.querySelector("input[placeholder='Password']");
@@ -92,8 +94,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (loginedUser) {
                 loginedUser.isLogged = true;
+                let tagUser = document.querySelector(".usernameHeader");
+                if (tagUser) {
+                    tagUser.textContent = loginedUser.username;
+                }
                 localStorage.setItem("users", JSON.stringify(users));
-                
+                localStorage.setItem("isLoginedUser", JSON.stringify(loginedUser));
+
                 alert("Giriş uğurludur!");
                 setTimeout(() => {
                     window.location.href = "home.html";
@@ -101,10 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 alert("İstifadəçi adı və ya şifrə yalnışdır!");
             }
-
-            
         });
     }
-
 
 });
