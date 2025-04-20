@@ -97,6 +97,10 @@ document.addEventListener("DOMContentLoaded", () => {
       let cardRating = document.createElement("div");
       cardRating.classList.add("card-rating");
 
+      let stars=document.createElement("p")
+      stars.textContent="⭐⭐⭐⭐⭐"
+      stars.style.fontSize="10px"
+
       let cardRate = document.createElement("span");
       cardRate.textContent = `⭐ ${product.rating?.rate || 0}`;
 
@@ -113,12 +117,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       cardRating.append(cardRate, cardReviewsCount);
       cardFooter.append(cardPrice, cardRating);
-      cardContent.append(cardTitle, cardCategory, cardFooter, addBasketBtn);
+      cardContent.append(stars ,cardTitle, cardCategory, cardFooter, addBasketBtn);
       cardImage.appendChild(img);
       card.append(heartIcon, cardImage, cardContent);
 
       card.addEventListener("click", () => {
-        window.location.href = `product-detail.html?id=${product.id}&title=${encodeURIComponent(product.title)}`;
+        window.location.href = `detail.html?id=${product.id}&title=${encodeURIComponent(product.title)}`;
       });
 
       cards.appendChild(card);
