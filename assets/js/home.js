@@ -9,6 +9,19 @@ document.addEventListener("DOMContentLoaded", () => {
   let logout = document.querySelector(".logout");
   let edit = document.querySelector(".edit");
 
+  let searchArea = document.getElementById("searchInput");
+
+  searchArea.addEventListener("keyup", () => {
+    let searchText = searchArea.value.toLowerCase().trim();
+
+    let filteredProducts = products.filter(product =>
+      product.title.toLowerCase().includes(searchText)
+    );
+
+
+    createUserCard(filteredProducts);
+  });
+
   let logoutUserFunction = () => {
     if (isLoginedUser) {
       isLoginedUser.isLogged = false;
@@ -38,11 +51,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateUserStatus();
 
-  function createUserCard() {
+  function createUserCard(productsArray = products) {
     let cards = document.querySelector(".cards");
     cards.innerHTML = "";
 
-    products.forEach(product => {
+    productsArray.forEach(product => {
       let card = document.createElement("div");
       card.classList.add("card");
 
@@ -112,7 +125,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-
   function sortProducts(criteria) {
     let sortedProducts;
 
@@ -126,13 +138,11 @@ document.addEventListener("DOMContentLoaded", () => {
       sortedProducts = [...products].sort((a, b) => b.title.localeCompare(a.title));
     }
 
-
     products = sortedProducts;
     createUserCard();
   }
 
-
-  document.getElementById('sortSelect').addEventListener('change', function() {
+  document.getElementById('sortSelect').addEventListener('change', function () {
     const selectedValue = this.value;
     sortProducts(selectedValue);
   });
@@ -220,6 +230,7 @@ document.addEventListener("DOMContentLoaded", () => {
   fetchProductsAndRender();
   basketCount();
 });
+
 
 let toatifyByPage = (text) => {
   Toastify({
