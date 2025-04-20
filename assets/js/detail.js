@@ -41,18 +41,12 @@ async function loadProductDetails() {
 
      <div class="product-info">
   <h2>${product.title}</h2>
-  <div class="product-rating">
-    <span><i class="fa fa-star text-warning"></i> ${product.rating}</span>
-    <span>| ${product.reviews?.length || 0} reviews</span>
-  </div>
 
-  <!-- 1. Brend və kateqoriya -->
   <div class="product-meta">
     <p><strong>Brand:</strong> ${product.brand}</p>
     <p><strong>Category:</strong> ${product.category}</p>
   </div>
 
-  <!-- 2. Qiymətlər və stok -->
   <div class="product-price-stock">
     <div class="product-price">
       <span class="price">${product.price}$</span>
@@ -67,7 +61,6 @@ async function loadProductDetails() {
     </p>
   </div>
 
-  <!-- 3. Ölçü və rəng seçimi + səbət düymələri -->
   <div class="product-options">
 <div class="selectors">
   <div class="size-selector">
@@ -79,11 +72,10 @@ async function loadProductDetails() {
 
   <div class="color-selector">
     <p><strong>Color:</strong></p>
-    <div class="selectColor">Red</div>
-    <div class="selectColor">Black</div>
-    <div class="selectColor">White</div>
-    <div class="selectColor">Blue</div>
-    <div class="selectColor">Green</div>
+    <div class="selectColor orange "></div>
+    <div class="selectColor green "></div>
+    <div class="selectColor pink"></div>
+    <div class="selectColor blue"></div>
   </div>
 </div>
 
