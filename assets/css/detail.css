@@ -301,6 +301,7 @@ main .product-container .product-details .add-to-cart:hover {
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
+  background-color: red;
 }
 .product-container .product-info h2 {
   font-size: 24px;
@@ -333,6 +334,38 @@ main .product-container .product-details .add-to-cart:hover {
   font-size: 16px;
   color: #aaa;
   text-decoration: line-through;
+}
+.product-container .product-info .selectors {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  width: 100%;
+}
+.product-container .product-info .selectors .size-selector,
+.product-container .product-info .selectors .color-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 33%;
+}
+.product-container .product-info .selectors .size-selector .selectOptions {
+  border: 1px solid black;
+  background-color: #f1c40f;
+  text-align: start;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #343a40;
+  width: 25%;
+  height: 30px;
+}
+.product-container .product-info .selectors .color-selector .selectColor {
+  border: 1px solid black;
+  background-color: #ddd;
+  padding: 6px;
+  text-align: center;
+  border-radius: 4px;
+  display: flex;
+  cursor: pointer;
 }
 .product-container .product-info .quantity-selector {
   display: flex;
