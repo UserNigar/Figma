@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="assets/css/home.scss">
   <link rel="stylesheet" href="assets/css/home.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"/>
@@ -19,7 +20,7 @@
           </div>
 
           <div class="input_area">
-            <input type="search" placeholder="Search..." />
+            <input type="search" id="searchInput" placeholder="Search..." />
             <i class="fa-solid fa-magnifying-glass"></i>
           </div>
 
@@ -45,7 +46,9 @@
               </div>
               <div class="header_icon">
                 <a href="basket.html" class="basketIcon">
-                  <i class="fa-solid fa-basket-shopping"></i>
+                  <i class="fa-solid fa-basket-shopping">
+                    <sup>0</sup>
+                  </i>
                 </a>
                 <p>basket</p>
               </div>
@@ -62,47 +65,29 @@
         <div class="text_area">
            <span>30% off</span>
            <h1>Handbag product</h1>
-           <p>It is a long established fact that a reader will be distracted by the readable content expound the actual teachings of the great explorer  </p>
-        <button>
-            shop now
-        </button>
+           <p>It is a long established fact that a reader will be distracted by the readable content expound the actual teachings of the great explorer.</p>
+           <button>shop now</button>
         </div>
         <div class="img_area">
             <div class="image">
-                <img src="assets/img/7771326b48a2887aa224f1621090d07b 1.svg" alt="">
+                <img src="assets/img/7771326b48a2887aa224f1621090d07b 1.svg" alt="Handbag" />
             </div>
         </div>
     </div>
-
   </section>
 
   <section id="products">
     <div class="container">
+      <select id="sortSelect">
+        <option>Sıralama seçin</option>
+        <option value="high">Qiymət: Yüksək → Aşağı</option>
+        <option value="low">Qiymət: Aşağı → Yüksək</option>
+        <option value="az">A-dan  Z-e</option>
+        <option value="za"> Z-den A-ya</option>
+      </select>
       <div class="row">
         <div class="cards">
-          <!-- <div class="card">
-            <div class="card-image">
-              <img
-                src="https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
-                alt="Fjallraven Backpack"
-              />
-            </div>
-            <div class="card-content">
-              <h2 class="card-title">Fjallraven - Foldsack No. 1 Backpack</h2>
-              <p class="card-category">Category: Men's Clothing</p>
-              <p class="card-description">
-                Your perfect pack for everyday use and walks in the forest.
-                Stash your laptop (up to 15 inches) in the padded sleeve.
-              </p>
-              <div class="card-footer">
-                <span class="card-price">$109.95</span>
-                <div class="card-rating">
-                  <span>⭐ 3.9</span>
-                  <span>(120 reviews)</span>
-                </div>
-              </div>
-            </div>
-          </div> -->
+      <!-- ----------------------------------------- -->
         </div>
       </div>
     </div>

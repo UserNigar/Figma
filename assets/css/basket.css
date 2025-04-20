@@ -147,7 +147,7 @@
     font-style: italic;
   }
   
-  /* Animations */
+
   @keyframes fadeDown {
     from {
       opacity: 0;
