@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hesab Parametrləri</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
+    <link rel="stylesheet" href="assets/css/edit.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Hesab Parametrləri</h1>
+        <form id="account-settings-form">
+            <div class="input-group">
+                <label for="name">Ad</label>
+                <input type="text" id="name" placeholder="Yeni adınız" required>
+            </div>
+            <div class="input-group">
+                <label for="email">E-poçt</label>
+                <input type="email" id="email" placeholder="Yeni e-poçt adresiniz" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Şifrə</label>
+                <input type="password" id="password" placeholder="Yeni şifrəniz" required>
+            </div>
+            <div class="input-group">
+                <label for="confirmPassword">Şifrəni Təkrar Edin</label>
+                <input type="password" id="confirmPassword" placeholder="Şifrənizi təkrar edin" required>
+            </div>
+            <button type="submit" id="save-button">Yadda Saxla</button>
+        </form>
+        <div id="message"></div>
+
+    </div>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+ 
+    <script src="assets/js/edit.js"></script>
+</body>
+</html>

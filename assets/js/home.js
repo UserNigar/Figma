@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
       isLoginedUser = null;
       toatifyByPage("Hesabdan çıxış edildi!");
       setTimeout(() => {
-        window.location.href = "login.html";
+        window.location.href = "index.html";
       }, 2000);
       updateUserStatus();
     }

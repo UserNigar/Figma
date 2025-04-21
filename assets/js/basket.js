@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       const itemInfo = document.createElement("div");
       itemInfo.className = "item-info";
-      itemInfo.innerHTML = `
+      itemInfo.innerHTML = ` 
         <h4>${product.title}</h4>
         <p>Kateqoriya: ${product.category}</p>
         <p>Çatdırılma: 5-7 gün</p>
@@ -76,6 +76,27 @@ document.addEventListener("DOMContentLoaded", async () => {
       const favBtn = document.createElement("button");
       favBtn.className = "favorite";
       favBtn.innerHTML = "&#9825; Favorite";
+
+      
+      if (isLoginedUser.wishlist && isLoginedUser.wishlist.some(wishlistItem => wishlistItem.id === item.id)) {
+        favBtn.style.color = 'red';
+      }
+
+      favBtn.addEventListener("click", () => {
+        if (isLoginedUser.wishlist && isLoginedUser.wishlist.some(wishlistItem => wishlistItem.id === item.id)) {
+         
+          isLoginedUser.wishlist = isLoginedUser.wishlist.filter(wishlistItem => wishlistItem.id !== item.id);
+          favBtn.style.color = ''; 
+          toatifyByPage("Məhsul wishlist-dən silindi");
+        } else {
+          
+          isLoginedUser.wishlist = isLoginedUser.wishlist || [];
+          isLoginedUser.wishlist.push(item);
+          favBtn.style.color = 'red'; 
+          toatifyByPage("Məhsul wishlist-ə əlavə olundu");
+        }
+        saveBasket();
+      });
 
       const removeBtn = document.createElement("button");
       removeBtn.className = "remove";
@@ -110,7 +131,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   createBasketItems();
 
- 
   searchInput.addEventListener("input", async () => {
     const searchText = searchInput.value.toLowerCase().trim();
     const products = await fetchProductData();
@@ -124,7 +144,6 @@ document.addEventListener("DOMContentLoaded", async () => {
   });
 });
 
-
 let toatifyByPage = (text) => {
   Toastify({
     text: text,
@@ -137,9 +156,6 @@ let toatifyByPage = (text) => {
     },
   }).showToast();
 };
-
-
-
 
 
 
