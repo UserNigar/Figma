@@ -5,7 +5,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!isLoginedUser || !isLoginedUser.basket) return;
 
   let userBasket = isLoginedUser.basket;
-  const basketContainer = document.getElementById("basket-container");
+  const cartProducts = document.querySelector(".cart-products");
+  const totalPriceElement = document.querySelector(".total span.total-price");
+  const subtotalElement = document.querySelector(".cart-summary p span");
+  const searchInput = document.getElementById("searchInput"); 
 
   async function fetchProductData() {
     try {
@@ -23,120 +26,125 @@ document.addEventListener("DOMContentLoaded", async () => {
     localStorage.setItem("users", JSON.stringify(users));
   }
 
-  async function createBasketItem() {
-    basketContainer.innerHTML = "";
-
+  async function createBasketItems() {
+    cartProducts.innerHTML = "";
     if (userBasket.length === 0) {
-      basketContainer.innerHTML = "<p class='empty-basket'>Səbət boşdur.</p>";
+      cartProducts.innerHTML = "<p class='empty-basket'>Səbət boşdur.</p>";
+      document.querySelector(".cart-summary .total span").textContent = "US $0.00";
+      document.querySelector(".cart-summary p span").textContent = "US $0.00";
       return;
     }
 
     const products = await fetchProductData();
-    let totalPrice = 0;
+    let total = 0;
 
-    userBasket.forEach(basketItem => {
-      const product = products.find(p => p.id === basketItem.id);
+    userBasket.forEach(item => {
+      const product = products.find(p => p.id === item.id);
       if (!product) return;
 
-      const basketDiv = document.createElement("div");
-      basketDiv.className = "basket-item";
+      const cartItem = document.createElement("div");
+      cartItem.className = "cart-item";
 
-      const imageDiv = document.createElement("div");
-      imageDiv.className = "image";
       const img = document.createElement("img");
-      img.src = Array.isArray(product.image) && product.image.length > 0
-        ? product.image[0]
-        : "https://via.placeholder.com/150"; // Əgər şəkil yoxdursa, ehtiyat şəkil göstər
+      img.src = `${product.images?.[0] || product.thumbnail}`;
       img.alt = product.title;
-      imageDiv.appendChild(img);
 
-      const title = document.createElement("h6");
-      title.className = "title";
-      title.textContent = product.title;
+      const itemInfo = document.createElement("div");
+      itemInfo.className = "item-info";
+      itemInfo.innerHTML = `
+        <h4>${product.title}</h4>
+        <p>Kateqoriya: ${product.category}</p>
+        <p>Çatdırılma: 5-7 gün</p>
+        <label>
+          Miqdar:
+          <select>
+            <option>${item.count}</option>
+          </select>
+        </label>
+      `;
 
-      const category = document.createElement("p");
-      category.className = "category";
-      category.textContent = product.category;
+      const itemActions = document.createElement("div");
+      itemActions.className = "item-actions";
 
       const price = document.createElement("p");
       price.className = "price";
-      price.textContent = `${product.price}$`;
+      price.textContent = `US $${(product.price * item.count).toFixed(2)}`;
 
-      const countArea = document.createElement("div");
-      countArea.className = "count-area";
+      const actionsDiv = document.createElement("div");
+      actionsDiv.className = "actions";
 
-      const minusBtn = document.createElement("button");
-      minusBtn.className = "minus-btn";
-      minusBtn.textContent = "-";
-      minusBtn.disabled = basketItem.count === 1;
-
-      const count = document.createElement("p");
-      count.className = "count";
-      count.textContent = basketItem.count;
-
-      const plusBtn = document.createElement("button");
-      plusBtn.className = "plus-btn";
-      plusBtn.textContent = "+";
-
-      countArea.appendChild(minusBtn);
-      countArea.appendChild(count);
-      countArea.appendChild(plusBtn);
+      const favBtn = document.createElement("button");
+      favBtn.className = "favorite";
+      favBtn.innerHTML = "&#9825; Favorite";
 
       const removeBtn = document.createElement("button");
-      removeBtn.className = "btn btn-danger";
+      removeBtn.className = "remove";
       removeBtn.textContent = "Sil";
 
-      basketDiv.appendChild(imageDiv);
-      basketDiv.appendChild(title);
-      basketDiv.appendChild(category);
-      basketDiv.appendChild(price);
-      basketDiv.appendChild(countArea);
-      basketDiv.appendChild(removeBtn);
-
-      basketContainer.appendChild(basketDiv);
-
-      totalPrice += product.price * basketItem.count;
-
-      minusBtn.addEventListener("click", () => {
-        if (basketItem.count > 1) {
-          basketItem.count--;
-          saveBasket();
-          createBasketItem();
-        }
-      });
-
-      plusBtn.addEventListener("click", () => {
-        basketItem.count++;
-        saveBasket();
-        createBasketItem();
-      });
-
       removeBtn.addEventListener("click", () => {
-        userBasket = userBasket.filter(p => p.id !== basketItem.id);
+        userBasket = userBasket.filter(b => b.id !== item.id);
         isLoginedUser.basket = userBasket;
         saveBasket();
-        createBasketItem();
+        createBasketItems();
+        toatifyByPage("Məhsul səbətdən silindi");
       });
+
+      actionsDiv.appendChild(favBtn);
+      actionsDiv.appendChild(removeBtn);
+
+      itemActions.appendChild(price);
+      itemActions.appendChild(actionsDiv);
+
+      cartItem.appendChild(img);
+      cartItem.appendChild(itemInfo);
+      cartItem.appendChild(itemActions);
+
+      cartProducts.appendChild(cartItem);
+
+      total += product.price * item.count;
     });
 
-    const total = document.createElement("p");
-    total.className = "total-price";
-    total.textContent = `Ümumi: ${totalPrice.toFixed(2)} $`;
-    basketContainer.appendChild(total);
-
-    // const deleteAllBtn = document.createElement("button");
-    // deleteAllBtn.className = "btn btn-danger delete-all";
-    // deleteAllBtn.textContent = "Səbəti Təmizlə";
-
-    // deleteAllBtn.addEventListener("click", () => {
-    //   userBasket = [];
-    //   isLoginedUser.basket = [];
-    //   saveBasket();
-    //   createBasketItem();
-    // });
-
-    basketContainer.appendChild(deleteAllBtn);
+    document.querySelector(".cart-summary .total span").textContent = `US $${total.toFixed(2)}`;
+    document.querySelector(".cart-summary p span").textContent = `US $${total.toFixed(2)}`;
   }
 
-  createBasketItem();
+  createBasketItems();
+
+ 
+  searchInput.addEventListener("input", async () => {
+    const searchText = searchInput.value.toLowerCase().trim();
+    const products = await fetchProductData();
+
+    const filteredBasket = userBasket.filter(item => {
+      const product = products.find(p => p.id === item.id);
+      return product && product.title.toLowerCase().includes(searchText);
+    });
+
+    createBasketItems(filteredBasket);
+  });
 });
+
+
+let toatifyByPage = (text) => {
+  Toastify({
+    text: text,
+    duration: 3000,
+    gravity: "top",
+    position: "left",
+    stopOnFocus: true,
+    style: {
+      background: "linear-gradient(to right,rgb(136, 39, 87),rgb(233, 5, 126))",
+    },
+  }).showToast();
+};
+
+
+
+
+
+
+
+
+
+
+

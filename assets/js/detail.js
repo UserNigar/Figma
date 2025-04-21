@@ -1,15 +1,12 @@
 async function loadProductDetails() {
-  // 1. Məhsul məlumatlarını götür
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
   const products = await (await fetch("http://localhost:3000/products")).json();
   const product = products.find(p => p.id == id);
-
-  // 2. İstifadəçi məlumatları
   const users = JSON.parse(localStorage.getItem("users")) || [];
   const isLoginedUser = users.find(u => u.isLogged === true);
 
-  // 3. Container-ı seç və HTML-i doldur
+
   const container = document.querySelector(".product-container");
   if (!container || !product) return console.error("Məhsul və ya konteyner tapılmadı.");
 
@@ -99,16 +96,15 @@ async function loadProductDetails() {
   const mainImg = container.querySelector(".main-image img");
   thumbnails.forEach(thumb => {
     thumb.addEventListener("click", () => {
-      // əsas şəkli yenilə
+      
       mainImg.src = thumb.src;
-      // bütün thumbnail-lərdən active sinfini sil
+     
       thumbnails.forEach(t => t.classList.remove("active"));
-      // kliklənənə active əlavə et
+      
       thumb.classList.add("active");
     });
   });
 
-  // 5. Miqdar artım/azaltma
   const qtyInput = container.querySelector(".quantity-selector input");
   container.querySelector(".btn-minus").addEventListener("click", () => {
     let v = parseInt(qtyInput.value);
@@ -118,7 +114,7 @@ async function loadProductDetails() {
     qtyInput.value = parseInt(qtyInput.value) + 1;
   });
 
-  // 6. Səbətə əlavə et
+
   container.querySelector(".btn-primary").addEventListener("click", () => {
     addBasket(product.id, parseInt(qtyInput.value), users, isLoginedUser, products);
   });
@@ -126,7 +122,7 @@ async function loadProductDetails() {
 
 function addBasket(id, qty, users, isLoginedUser, products) {
   if (!isLoginedUser) {
-    alert("Zəhmət olmasa daxil olun.");
+    toatifyByPage("Zəhmət olmasa daxil olun.");
     return;
   }
   const idx = users.findIndex(u => u.id === isLoginedUser.id);
@@ -135,11 +131,11 @@ function addBasket(id, qty, users, isLoginedUser, products) {
 
   if (exists) {
     exists.count += qty;
-    alert("Məhsul sayı artırıldı.");
+    toatifyByPage("Məhsul sayı artırıldı.");
   } else {
     const prod = products.find(p => p.id === id);
     basket.push({ ...prod, count: qty });
-    alert("Məhsul səbətə əlavə olundu.");
+    toatifyByPage("Məhsul səbətə əlavə olundu.");
   }
 
   isLoginedUser.basket = basket;
@@ -148,3 +144,16 @@ function addBasket(id, qty, users, isLoginedUser, products) {
 }
 
 loadProductDetails();
+
+let toatifyByPage = (text) => {
+  Toastify({
+    text: text,
+    duration: 3000,
+    gravity: "top",
+    position: "left",
+    stopOnFocus: true,
+    style: {
+      background: "linear-gradient(to right,rgb(136, 39, 87),rgb(233, 5, 126))",
+    },
+  }).showToast();
+};

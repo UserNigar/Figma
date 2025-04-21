@@ -1,10 +1,16 @@
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
- 
+  
+  body {
+    font-family: "Segoe UI", sans-serif;
+    background-color: #fef6fb;
+  }
+  
+  
   header {
     padding: 10px 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -169,149 +175,99 @@
       gap: 10px;
     }
   }
-  .cart-container {
+  
+  /* Wishlist konteyneri */
+.wishlist-container {
+    padding: 60px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Ümumi Wishlist strukturu */
+  .wishlist {
     display: flex;
-    gap: 20px;
-    padding: 30px;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #ffe4ec;
+    flex-direction: column;
+    gap: 24px;
+  }
   
-    .cart-products {
-      flex: 3;
-      display: flex;
+  /* Wishlist item görünüşü */
+  .wishlist-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    background-color: #fff;
+    border: 1px solid #ececec;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease; /* hover yoxdur, amma scroll zamanı daha smooth görünəcək */
+  }
+  
+  /* Şəkil sahəsi */
+  .wishlist-item .image {
+    width: 140px;
+    height: 100px;
+    border-radius: 8px;
+    background-color: #f7f7f7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  
+  /* Şəkilin özü */
+  .wishlist-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+  }
+  
+  /* Məhsul məlumatı */
+  .wishlist-item .title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    flex: 1;
+    margin: 0 0 6px 0;
+  }
+  
+  .wishlist-item .category {
+    font-size: 14px;
+    font-weight: 400;
+    color: #777;
+    flex: 1;
+    margin-bottom: 4px;
+  }
+  
+  .wishlist-item .price {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+  
+  /* Link stili */
+  .link {
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    color: #555;
+  }
+  
+  /* Responsivlik */
+  @media screen and (max-width: 768px) {
+    .wishlist-item {
       flex-direction: column;
-      gap: 20px;
-  
-      .cart-item {
-        display: flex;
-        gap: 15px;
-        padding: 15px;
-        border: 1px solid #eee;
-        border-radius: 10px;
-        background: #fff;
-        align-items: flex-start;
-  
-        img {
-          width: 100px;
-          height: auto;
-          border-radius: 8px;
-        }
-  
-        .item-info {
-          flex: 1;
-  
-          h4 {
-            margin: 0 0 8px;
-          }
-  
-          p {
-            margin: 4px 0;
-            color: #444;
-            span {
-              margin-left: 10px;
-            }
-          }
-  
-          select {
-            margin-left: 5px;
-            padding: 4px;
-          }
-        }
-  
-        .item-actions {
-          text-align: right;
-  
-          .price {
-            font-weight: bold;
-            margin-bottom: 10px;
-          }
-  
-          .actions {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-  
-            .favorite {
-              background: none;
-              border: none;
-              color: #777;
-              cursor: pointer;
-  
-              &.active {
-                color: red;
-              }
-            }
-  
-            .remove {
-              background: none;
-              border: none;
-              color: #777;
-              cursor: pointer;
-            }
-          }
-        }
-      }
+      align-items: center;
+      text-align: center;
     }
   
-    .cart-summary {
-      flex: 1;
-      padding: 20px;
-      border: 1px solid #eee;
-      border-radius: 10px;
-      background: #fafafa;
-      height: 400px;
-  
-      p {
-        display: flex;
-        justify-content: space-between;
-        margin: 10px 0;
-      }
-  
-      .total {
-        font-weight: bold;
-      }
-  
-      input {
-        width: 100%;
-        padding: 8px;
-        margin-top: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-  
-      .apply {
-        margin-top: 10px;
-        width: 100%;
-        background: #f44;
-        color: white;
-        border: none;
-        padding: 10px;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-  
-      .confirm {
-        margin-top: 15px;
-        background: #d33;
-        color: white;
-        border: none;
-        width: 100%;
-        padding: 12px;
-        border-radius: 5px;
-        font-weight: bold;
-      }
-  
-      .cash {
-        margin-top: 10px;
-        background: white;
-        border: 2px solid #444;
-        color: #444;
-        width: 100%;
-        padding: 12px;
-        border-radius: 5px;
-        font-weight: bold;
-        cursor: pointer;
-      }
+    .wishlist-item .price {
+      margin-top: 12px;
     }
   }
   

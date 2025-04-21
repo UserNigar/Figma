@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Basket</title>
+    <title>Wishlist</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css"
@@ -17,7 +17,7 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
     />
-    <link rel="stylesheet" href="./assets/css/basket.css" />
+    <link rel="stylesheet" href="./assets/css/wishlist.css"/>
   </head>
   <body>
     <header>
@@ -56,6 +56,7 @@
                   <div class="header_icon">
                     <a href="basket.html" class="basketIcon">
                       <i class="fa-solid fa-basket-shopping">
+                        <sup>0</sup>
                       </i>
                     </a>
                     <p>basket</p>
@@ -68,52 +69,32 @@
         </div>
       </header>
     <main>
-      <section id="basket-container">
-        <div class="cart-container">
-          <div class="cart-products">
-            <!-- <div class="cart-item">
-              <img src="backpack.jpg" alt="Backpack">
-              <div class="item-info">
-                <h4>Hotel Magique Love and Magique Tote Bag</h4>
-                <p>Size: XS <span>Color: Grey</span></p>
-                <p>Delivery: 25-32 days</p>
-                <label>
-                  Quantity:
-                  <select>
-                    <option>2-9</option>
-                    <option>10-49</option>
-                    <option>50</option>
-                  </select>
-                </label>
-              </div>
-              <div class="item-actions">
-                <p class="price">US $20.00</p>
-                <div class="actions">
-                  <button class="favorite">&#9825; Favorite</button>
-                  <button class="remove">Remove</button>
+      <section class="wishlist-container">
+        <div class="container">
+          <div class="row">
+            <div class="wishlist">
+              <!-- <div class="wishlist-item">
+                <div class="image">
+                  <img
+                    src="https://via.placeholder.com/150"
+                    alt="Product Image"
+                  />
                 </div>
-              </div>
-            </div> -->
-          </div>
-        
-          <div class="cart-summary">
-            <p>Your subtotal <span>US $20.00</span></p>
-            <p>Shipping changes <span>Free</span></p>
-            <hr>
-            <p class="total">Total <span>US $20.00</span></p>
-            <input type="text" placeholder="Discount promo code">
-            <button class="apply">Apply</button>
-            <button class="confirm">Confirm cart</button>
-            <button class="cash">Cash payment</button>
+                <h3 class="title">Product Name</h3>
+                <p class="category">Product category</p>
+                <p class="price">$50.00</p>
+                <button class="btn btn-danger">Remove</button>
+              </div> -->
+            </div>
+            <a class="link" href="home.html">back</a>
           </div>
         </div>
       </section>
     </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="assets/js/basket.js"></script>
-    <script src="assets/js/home.js"></script>
-    <script src="assets/js/index.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <script src="./assets/js/wishlist.js"></script>
   </body>
 </html>
-
